@@ -18,14 +18,23 @@ Sub foo()
             If isNumeric(numberOfResult) = False Then GoTo CONTINUE End If
             Dim numberOfResult As Long
             numberOfResult = Val(numberOfResultAsString)
+            Dim result As Double
+            result = Val(stringArray(6))
             Dim i As Long
             For i = 0 To 1
                 Worksheets(i).select
                 Dim j As Long
                 For j = 0 To 50
                     Dim s As String
-                    s = Cells(numberedColumn, j)
+                    s = Cells(numberedColumn, j).Value
                     If isNumeric(s) = False Then GoTo CONTINUE2 End If
+                    Dim v As Long
+                    v = Val(s)
+                    If numberOfResult = v Then
+                        Worksheets(i).Cells(numberedColumn, j).Value = result
+                    End If
                     CONTINUE2:
             CONTINUE:
         Loop
+    End Do
+End Sub
